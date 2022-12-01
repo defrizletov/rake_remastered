@@ -166,7 +166,7 @@ PowerLevelValue.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 PowerLevelValue.TextStrokeTransparency = 0
  
 Toggle1.MouseButton1Click:connect(function()
-    ReplicatedStorage.CurrentLightingProperties.FogEnd.Value = 1000;
+    ReplicatedStorage.CurrentLightingProperties.FogEnd.Value = 9999;
     if ReplicatedStorage.Night.Value == true then
         ReplicatedStorage.CurrentLightingProperties.Brightness.Value = 50;
     else
