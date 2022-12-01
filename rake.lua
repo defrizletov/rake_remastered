@@ -16,7 +16,7 @@ local HalfEndTimeValue = Instance.new("TextLabel")
 local Credit = Instance.new("TextLabel")
 local Player = Players.LocalPlayer
  
-LightHack.Name = "Rake Hack"
+LightHack.Name = "RakeHack"
 LightHack.Parent = game.CoreGui
  
 BG.Name = "BG"
@@ -63,10 +63,11 @@ Toggle2.Position = UDim2.new(0.152380958, 0, 0.35, 0)
 Toggle2.Size = UDim2.new(0, 130, 0, 35)
 Toggle2.Font = Enum.Font.Highway
 Toggle2.FontSize = Enum.FontSize.Size28
-Toggle2.Text = "Speed"
+Toggle2.Text = "Speed & Stamina Hack"
 Toggle2.TextColor3 = Color3.new(1, 1, 1)
-Toggle2.TextSize = 20
+Toggle2.TextSize = 19
 Toggle2.TextStrokeTransparency = 0
+Toggle2.TextWrapped = true
 
 Toggle3.Parent = BG
 Toggle3.BackgroundColor3 = Color3.new(31, 149, 134)
@@ -102,7 +103,7 @@ Credit.Position = UDim2.new(0.195238099, 0, 0.866141737, 0)
 Credit.Size = UDim2.new(0, 128, 0, 17)
 Credit.Font = Enum.Font.SourceSans
 Credit.FontSize = Enum.FontSize.Size18
-Credit.Text = "Created by defriz"
+Credit.Text = "by defriz"
 Credit.TextColor3 = Color3.new(1, 1, 1)
 Credit.TextSize = 16
 Credit.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
@@ -178,19 +179,32 @@ Toggle1.MouseButton2Click:connect(function ()
 end)
 
 Toggle2.MouseButton1Click:connect(function()
+    for k,v in pairs(Player.PlayerGui:GetChildren()) do
+        if(v.DataCost == 631) then v.Frame.StaminaFrame:destroy() end
+    end
     while true do
-		wait(0.1)
-        Player.Character.Humanoid.WalkSpeed = 60
+		wait(0.0)
+        Player.Character.Humanoid.WalkSpeed = 27
     end
 end)
 
 Toggle3.MouseButton1Click:connect(function()
-    print(Workspace.Map.Other)
-    Workspace.Map.Other:destroy()
+	Workspace.Map.SafeHouse.Door:destroy()
+	Workspace.Map.Other:destroy()
+    for k,v in pairs(Workspace.Filter:GetChildren()) do
+        if(string.find(v.Name, "Invisible") ~= nil) then
+            v:destroy()
+        end
+    end
 end)
 
 Toggle4.MouseButton1Click:connect(function()
     Workspace.Map.Trees:destroy()
+    for k,v in pairs(Workspace.Filter:GetChildren()) do
+        if(string.find(v.Name, "Invisible") ~= nil) then
+            v:destroy()
+        end
+    end
 end)
 
 while true do
