@@ -375,15 +375,16 @@ while true do
     wait(0.0)
     PowerLevelValue.Text = ReplicatedStorage.PowerValues.PowerLevel.Value
     HalfEndTimeValue.Text = ReplicatedStorage.Timer.Value
-    Player:WaitForChild("Character")
-    for m, l in pairs(Player.Character:GetChildren()) do
-        if(l.Name == "HumanoidRootPart") then
-            PlayerCoordsValue.Text = tostring(round(l.Position.X)).." "..tostring(round(l.Position.Y)).." "..tostring(round(l.Position.Z))
-            for k,v in pairs(Workspace:GetChildren()) do
-                if(v.Name == "Rake") then
-                    for _,d in pairs(v:GetChildren()) do
-                        if(d.Name == "HumanoidRootPart") then
-                            RakeDistanceValue.Text = string.format("%g",string.format("%.1f",math.sqrt(round((math.abs(round(l.Position.X) - round(d.Position.X)))) + (round(math.abs(round(l.Position.Y) - round(d.Position.Y)))) + (round(math.abs(round(l.Position.Z) - round(d.Position.Z)))))))
+    if(Player.Started.Value == true) then
+        for m, l in pairs(Player.Character:GetChildren()) do
+            if(l.Name == "HumanoidRootPart") then
+                PlayerCoordsValue.Text = tostring(round(l.Position.X)).." "..tostring(round(l.Position.Y)).." "..tostring(round(l.Position.Z))
+                for k,v in pairs(Workspace:GetChildren()) do
+                    if(v.Name == "Rake") then
+                        for _,d in pairs(v:GetChildren()) do
+                            if(d.Name == "HumanoidRootPart") then
+                                RakeDistanceValue.Text = string.format("%g",string.format("%.1f",math.sqrt(round((math.abs(round(l.Position.X) - round(d.Position.X)))) + (round(math.abs(round(l.Position.Y) - round(d.Position.Y)))) + (round(math.abs(round(l.Position.Z) - round(d.Position.Z)))))))
+                            end
                         end
                     end
                 end
