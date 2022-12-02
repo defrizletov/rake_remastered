@@ -311,8 +311,6 @@ Toggle1.MouseButton1Click:connect(function()
     ReplicatedStorage.CurrentLightingProperties.FogEnd.Value = 9999;
     if ReplicatedStorage.Night.Value == true then
         ReplicatedStorage.CurrentLightingProperties.Brightness.Value = 50;
-    else
-        ReplicatedStorage.CurrentLightingProperties.Brightness.Value = 10;
     end
 end)
 
