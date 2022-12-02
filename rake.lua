@@ -375,7 +375,7 @@ while true do
     wait(0.0)
     PowerLevelValue.Text = ReplicatedStorage.PowerValues.PowerLevel.Value
     HalfEndTimeValue.Text = ReplicatedStorage.Timer.Value
-    if(Player.Started.Value == true and Player.Dead.Value ~= true) then
+    if(Player.Started.Value == true) then
         for m, l in pairs(Player.Character:GetChildren()) do
             if(l.Name == "HumanoidRootPart") then
                 PlayerCoordsValue.Text = tostring(round(l.Position.X)).." "..tostring(round(l.Position.Y)).." "..tostring(round(l.Position.Z))
