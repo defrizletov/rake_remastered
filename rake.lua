@@ -8,6 +8,8 @@ local mapImage = Instance.new("ImageLabel")
 local mapFrame = Instance.new("Frame")
 local BG = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
+local HPText = Instance.new("TextLabel")
+local HPValue = Instance.new("TextLabel")
 local PowerLevel = Instance.new("TextLabel")
 local PowerLevelValue = Instance.new("TextLabel")
 local HalfEndTime = Instance.new("TextLabel")
@@ -26,7 +28,6 @@ local Toggle6 = Instance.new("TextButton")
 local Toggle7 = Instance.new("TextButton")
 
 local Player = Players.LocalPlayer
-local shopVisible = false
 
 local function round(x)
     return x >= 0 and math.floor(x+0.5) or math.ceil(x-0.5)
@@ -66,9 +67,9 @@ Toggle1.Position = UDim2.new(0.152380958, 0, 0.17, 0)
 Toggle1.Size = UDim2.new(0, 130, 0, 35)
 Toggle1.Font = Enum.Font.Highway
 Toggle1.FontSize = Enum.FontSize.Size28
-Toggle1.Text = "Light"
+Toggle1.Text = "Light & Fog Hack"
 Toggle1.TextColor3 = Color3.new(1, 1, 1)
-Toggle1.TextSize = 20
+Toggle1.TextSize = 17
 Toggle1.TextStrokeTransparency = 0
 
 Toggle2.Parent = BG
@@ -187,6 +188,36 @@ Credit.TextSize = 16
 Credit.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 Credit.TextStrokeTransparency = 0
 
+HPText.Name = "HP"
+HPText.Parent = BG
+HPText.BackgroundColor3 = Color3.new(1, 1, 1)
+HPText.BackgroundTransparency = 1
+HPText.Position = UDim2.new(0.05, 0, 0.7, 0)
+HPText.Size = UDim2.new(0, 128, 0, 17)
+HPText.Font = Enum.Font.SourceSans
+HPText.FontSize = Enum.FontSize.Size18
+HPText.Text = "HP: "
+HPText.TextColor3 = Color3.new(1, 1, 1)
+HPText.TextSize = 20
+HPText.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+HPText.TextStrokeTransparency = 0
+HPText.TextWrapped = true
+
+HPValue.Name = "HPValue"
+HPValue.Parent = BG
+HPValue.BackgroundColor3 = Color3.new(1, 1, 1)
+HPValue.BackgroundTransparency = 1
+HPValue.Position = UDim2.new(0.45, 0, 0.7, 0)
+HPValue.Size = UDim2.new(0, 128, 0, 17)
+HPValue.Font = Enum.Font.SourceSans
+HPValue.FontSize = Enum.FontSize.Size18
+HPValue.Text = "0"
+HPValue.TextColor3 = Color3.new(0,185,0)
+HPValue.TextSize = 20
+HPValue.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+HPValue.TextStrokeTransparency = 0
+HPValue.TextWrapped = true
+
 PlayerCoords.Name = "PlayerCoords"
 PlayerCoords.Parent = BG
 PlayerCoords.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -195,9 +226,9 @@ PlayerCoords.Position = UDim2.new(0.05, 0, 0.75, 0)
 PlayerCoords.Size = UDim2.new(0, 128, 0, 17)
 PlayerCoords.Font = Enum.Font.SourceSans
 PlayerCoords.FontSize = Enum.FontSize.Size18
-PlayerCoords.Text = "Your coords: "
+PlayerCoords.Text = "Coords: "
 PlayerCoords.TextColor3 = Color3.new(1, 1, 1)
-PlayerCoords.TextSize = 17
+PlayerCoords.TextSize = 18
 PlayerCoords.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 PlayerCoords.TextStrokeTransparency = 0
 PlayerCoords.TextWrapped = true
@@ -206,7 +237,7 @@ PlayerCoordsValue.Name = "PlayerCoordsValue"
 PlayerCoordsValue.Parent = BG
 PlayerCoordsValue.BackgroundColor3 = Color3.new(1, 1, 1)
 PlayerCoordsValue.BackgroundTransparency = 1
-PlayerCoordsValue.Position = UDim2.new(0.45, 0, 0.75, 0)
+PlayerCoordsValue.Position = UDim2.new(0.4, 0, 0.75, 0)
 PlayerCoordsValue.Size = UDim2.new(0, 128, 0, 17)
 PlayerCoordsValue.Font = Enum.Font.SourceSans
 PlayerCoordsValue.FontSize = Enum.FontSize.Size18
@@ -225,7 +256,7 @@ RakeDistance.Position = UDim2.new(0.12, 0, 0.8, 0)
 RakeDistance.Size = UDim2.new(0, 128, 0, 17)
 RakeDistance.Font = Enum.Font.SourceSans
 RakeDistance.FontSize = Enum.FontSize.Size18
-RakeDistance.Text = "Rake dist. to you: "
+RakeDistance.Text = "Rake distance: "
 RakeDistance.TextColor3 = Color3.new(1, 1, 1)
 RakeDistance.TextSize = 17
 RakeDistance.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
@@ -251,7 +282,7 @@ HalfEndTime.Name = "Time"
 HalfEndTime.Parent = BG
 HalfEndTime.BackgroundColor3 = Color3.new(1, 1, 1)
 HalfEndTime.BackgroundTransparency = 1
-HalfEndTime.Position = UDim2.new(0.17, 0, 0.85, 0)
+HalfEndTime.Position = UDim2.new(0.15, 0, 0.85, 0)
 HalfEndTime.Size = UDim2.new(0, 128, 0, 17)
 HalfEndTime.Font = Enum.Font.SourceSans
 HalfEndTime.FontSize = Enum.FontSize.Size18
@@ -281,7 +312,7 @@ PowerLevel.Name = "PowerLevel"
 PowerLevel.Parent = BG
 PowerLevel.BackgroundColor3 = Color3.new(1, 1, 1)
 PowerLevel.BackgroundTransparency = 1
-PowerLevel.Position = UDim2.new(0.17, 0, 0.9, 0)
+PowerLevel.Position = UDim2.new(0.15, 0, 0.9, 0)
 PowerLevel.Size = UDim2.new(0, 128, 0, 17)
 PowerLevel.Font = Enum.Font.SourceSans
 PowerLevel.FontSize = Enum.FontSize.Size18
@@ -373,11 +404,14 @@ end)
 
 while true do
     wait(0.0)
-    PowerLevelValue.Text = ReplicatedStorage.PowerValues.PowerLevel.Value
-    HalfEndTimeValue.Text = ReplicatedStorage.Timer.Value
+    PowerLevelValue.Text = tostring(ReplicatedStorage.PowerValues.PowerLevel.Value / 10)..'%'
+	HalfEndTimeValue.Text = ReplicatedStorage.Timer.Value
     for n, c in pairs(Workspace:GetChildren()) do
         if(c.Name == Player.Name) then
             for m, l in pairs(c:GetChildren()) do
+				if(l.Name == "Humanoid") then
+					HPValue.Text = string.format("%g",string.format("%.1f",tostring(l.Health)))
+				end
                 if(l.Name == "HumanoidRootPart") then
                     PlayerCoordsValue.Text = tostring(round(l.Position.X)).." "..tostring(round(l.Position.Y)).." "..tostring(round(l.Position.Z))
                     for k,v in pairs(Workspace:GetChildren()) do
