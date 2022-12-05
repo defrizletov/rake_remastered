@@ -8,6 +8,10 @@ local mapImage = Instance.new("ImageLabel")
 local mapFrame = Instance.new("Frame")
 local BG = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
+local ScrapsText = Instance.new("TextLabel")
+local ScrapsValue = Instance.new("TextLabel")
+local FlareGunText = Instance.new("TextLabel")
+local FlareGunValue = Instance.new("TextLabel")
 local HPText = Instance.new("TextLabel")
 local HPValue = Instance.new("TextLabel")
 local PowerLevel = Instance.new("TextLabel")
@@ -19,15 +23,18 @@ local RakeDistanceValue = Instance.new("TextLabel")
 local PlayerCoords = Instance.new("TextLabel")
 local PlayerCoordsValue = Instance.new("TextLabel")
 local Credit = Instance.new("TextLabel")
-local Toggle1 = Instance.new("TextButton")
-local Toggle2 = Instance.new("TextButton")
-local Toggle3 = Instance.new("TextButton")
-local Toggle4 = Instance.new("TextButton")
-local Toggle5 = Instance.new("TextButton")
-local Toggle6 = Instance.new("TextButton")
-local Toggle7 = Instance.new("TextButton")
+local Btn1 = Instance.new("TextButton")
+local Btn2 = Instance.new("TextButton")
+local Btn3 = Instance.new("TextButton")
+local Btn4 = Instance.new("TextButton")
+local Btn5 = Instance.new("TextButton")
+local Btn6 = Instance.new("TextButton")
+local Btn7 = Instance.new("TextButton")
 
 local Player = Players.LocalPlayer
+local ScrapsCount = 0
+local flareGunFound = false
+local newColor = Color3.new(0.666667, 0, 0)
 
 local function round(x)
     return x >= 0 and math.floor(x+0.5) or math.ceil(x-0.5)
@@ -59,100 +66,100 @@ Title.FontSize = Enum.FontSize.Size32
 Title.TextSize = 30
 Title.TextStrokeTransparency = 0
  
-Toggle1.Parent = BG
-Toggle1.BackgroundColor3 = Color3.new(31, 149, 134)
-Toggle1.BorderColor3 = Color3.new(31, 149, 134)
-Toggle1.BorderSizePixel = 2
-Toggle1.Position = UDim2.new(0.152380958, 0, 0.17, 0)
-Toggle1.Size = UDim2.new(0, 130, 0, 35)
-Toggle1.Font = Enum.Font.Highway
-Toggle1.FontSize = Enum.FontSize.Size28
-Toggle1.Text = "Light & Fog Hack"
-Toggle1.TextColor3 = Color3.new(1, 1, 1)
-Toggle1.TextSize = 17
-Toggle1.TextStrokeTransparency = 0
+Btn1.Parent = BG
+Btn1.BackgroundColor3 = Color3.new(31, 149, 134)
+Btn1.BorderColor3 = Color3.new(31, 149, 134)
+Btn1.BorderSizePixel = 2
+Btn1.Position = UDim2.new(0.152380958, 0, 0.17, 0)
+Btn1.Size = UDim2.new(0, 130, 0, 35)
+Btn1.Font = Enum.Font.Highway
+Btn1.FontSize = Enum.FontSize.Size28
+Btn1.Text = "Light & Fog Hack"
+Btn1.TextColor3 = Color3.new(1, 1, 1)
+Btn1.TextSize = 17
+Btn1.TextStrokeTransparency = 0
 
-Toggle2.Parent = BG
-Toggle2.BackgroundColor3 = Color3.new(31, 149, 134)
-Toggle2.BorderColor3 = Color3.new(31, 149, 134)
-Toggle2.BorderSizePixel = 2
-Toggle2.Position = UDim2.new(0.152380958, 0, 0.24, 0)
-Toggle2.Size = UDim2.new(0, 130, 0, 35)
-Toggle2.Font = Enum.Font.Highway
-Toggle2.FontSize = Enum.FontSize.Size28
-Toggle2.Text = "Speed & Stamina Hack"
-Toggle2.TextColor3 = Color3.new(1, 1, 1)
-Toggle2.TextSize = 17
-Toggle2.TextStrokeTransparency = 0
-Toggle2.TextWrapped = true
+Btn2.Parent = BG
+Btn2.BackgroundColor3 = Color3.new(31, 149, 134)
+Btn2.BorderColor3 = Color3.new(31, 149, 134)
+Btn2.BorderSizePixel = 2
+Btn2.Position = UDim2.new(0.152380958, 0, 0.24, 0)
+Btn2.Size = UDim2.new(0, 130, 0, 35)
+Btn2.Font = Enum.Font.Highway
+Btn2.FontSize = Enum.FontSize.Size28
+Btn2.Text = "Speed & Stamina Hack"
+Btn2.TextColor3 = Color3.new(1, 1, 1)
+Btn2.TextSize = 17
+Btn2.TextStrokeTransparency = 0
+Btn2.TextWrapped = true
 
-Toggle3.Parent = BG
-Toggle3.BackgroundColor3 = Color3.new(31, 149, 134)
-Toggle3.BorderColor3 = Color3.new(31, 149, 134)
-Toggle3.BorderSizePixel = 2
-Toggle3.Position = UDim2.new(0.152380958, 0, 0.31, 0)
-Toggle3.Size = UDim2.new(0, 130, 0, 35)
-Toggle3.Font = Enum.Font.Highway
-Toggle3.FontSize = Enum.FontSize.Size28
-Toggle3.Text = "Delete Other"
-Toggle3.TextColor3 = Color3.new(1, 1, 1)
-Toggle3.TextSize = 20
-Toggle3.TextStrokeTransparency = 0
+Btn3.Parent = BG
+Btn3.BackgroundColor3 = Color3.new(31, 149, 134)
+Btn3.BorderColor3 = Color3.new(31, 149, 134)
+Btn3.BorderSizePixel = 2
+Btn3.Position = UDim2.new(0.152380958, 0, 0.31, 0)
+Btn3.Size = UDim2.new(0, 130, 0, 35)
+Btn3.Font = Enum.Font.Highway
+Btn3.FontSize = Enum.FontSize.Size28
+Btn3.Text = "Delete Other"
+Btn3.TextColor3 = Color3.new(1, 1, 1)
+Btn3.TextSize = 20
+Btn3.TextStrokeTransparency = 0
 
-Toggle4.Parent = BG
-Toggle4.BackgroundColor3 = Color3.new(31, 149, 134)
-Toggle4.BorderColor3 = Color3.new(31, 149, 134)
-Toggle4.BorderSizePixel = 2
-Toggle4.Position = UDim2.new(0.152380958, 0, 0.10, 0)
-Toggle4.Size = UDim2.new(0, 130, 0, 35)
-Toggle4.Font = Enum.Font.Highway
-Toggle4.FontSize = Enum.FontSize.Size28
-Toggle4.Text = "Delete Trees"
-Toggle4.TextColor3 = Color3.new(1, 1, 1)
-Toggle4.TextSize = 20
-Toggle4.TextStrokeTransparency = 0
+Btn4.Parent = BG
+Btn4.BackgroundColor3 = Color3.new(31, 149, 134)
+Btn4.BorderColor3 = Color3.new(31, 149, 134)
+Btn4.BorderSizePixel = 2
+Btn4.Position = UDim2.new(0.152380958, 0, 0.10, 0)
+Btn4.Size = UDim2.new(0, 130, 0, 35)
+Btn4.Font = Enum.Font.Highway
+Btn4.FontSize = Enum.FontSize.Size28
+Btn4.Text = "Delete Trees"
+Btn4.TextColor3 = Color3.new(1, 1, 1)
+Btn4.TextSize = 20
+Btn4.TextStrokeTransparency = 0
 
-Toggle5.Parent = BG
-Toggle5.BackgroundColor3 = Color3.new(31, 149, 134)
-Toggle5.BorderColor3 = Color3.new(31, 149, 134)
-Toggle5.BorderSizePixel = 2
-Toggle5.Position = UDim2.new(0.152380958, 0, 0.38, 0)
-Toggle5.Size = UDim2.new(0, 130, 0, 35)
-Toggle5.Font = Enum.Font.Highway
-Toggle5.FontSize = Enum.FontSize.Size28
-Toggle5.Text = "AutoCollect Scraps"
-Toggle5.TextColor3 = Color3.new(1, 1, 1)
-Toggle5.TextSize = 17
-Toggle5.TextStrokeTransparency = 0
-Toggle5.TextWrapped = true
+Btn5.Parent = BG
+Btn5.BackgroundColor3 = Color3.new(31, 149, 134)
+Btn5.BorderColor3 = Color3.new(31, 149, 134)
+Btn5.BorderSizePixel = 2
+Btn5.Position = UDim2.new(0.152380958, 0, 0.38, 0)
+Btn5.Size = UDim2.new(0, 130, 0, 35)
+Btn5.Font = Enum.Font.Highway
+Btn5.FontSize = Enum.FontSize.Size28
+Btn5.Text = "AutoCollect Scraps"
+Btn5.TextColor3 = Color3.new(1, 1, 1)
+Btn5.TextSize = 17
+Btn5.TextStrokeTransparency = 0
+Btn5.TextWrapped = true
 
-Toggle6.Parent = BG
-Toggle6.BackgroundColor3 = Color3.new(31, 149, 134)
-Toggle6.BorderColor3 = Color3.new(31, 149, 134)
-Toggle6.BorderSizePixel = 2
-Toggle6.Position = UDim2.new(0.152380958, 0, 0.45, 0)
-Toggle6.Size = UDim2.new(0, 130, 0, 35)
-Toggle6.Font = Enum.Font.Highway
-Toggle6.FontSize = Enum.FontSize.Size28
-Toggle6.Text = "PickUp FlareGun"
-Toggle6.TextColor3 = Color3.new(1, 1, 1)
-Toggle6.TextSize = 17
-Toggle6.TextStrokeTransparency = 0
-Toggle6.TextWrapped = true
+Btn6.Parent = BG
+Btn6.BackgroundColor3 = Color3.new(31, 149, 134)
+Btn6.BorderColor3 = Color3.new(31, 149, 134)
+Btn6.BorderSizePixel = 2
+Btn6.Position = UDim2.new(0.152380958, 0, 0.45, 0)
+Btn6.Size = UDim2.new(0, 130, 0, 35)
+Btn6.Font = Enum.Font.Highway
+Btn6.FontSize = Enum.FontSize.Size28
+Btn6.Text = "PickUp FlareGun"
+Btn6.TextColor3 = Color3.new(1, 1, 1)
+Btn6.TextSize = 17
+Btn6.TextStrokeTransparency = 0
+Btn6.TextWrapped = true
 
-Toggle7.Parent = BG
-Toggle7.BackgroundColor3 = Color3.new(31, 149, 134)
-Toggle7.BorderColor3 = Color3.new(31, 149, 134)
-Toggle7.BorderSizePixel = 2
-Toggle7.Position = UDim2.new(0.152380958, 0, 0.52, 0)
-Toggle7.Size = UDim2.new(0, 130, 0, 35)
-Toggle7.Font = Enum.Font.Highway
-Toggle7.FontSize = Enum.FontSize.Size28
-Toggle7.Text = "Toggle Map"
-Toggle7.TextColor3 = Color3.new(1, 1, 1)
-Toggle7.TextSize = 17
-Toggle7.TextStrokeTransparency = 0
-Toggle7.TextWrapped = true
+Btn7.Parent = BG
+Btn7.BackgroundColor3 = Color3.new(31, 149, 134)
+Btn7.BorderColor3 = Color3.new(31, 149, 134)
+Btn7.BorderSizePixel = 2
+Btn7.Position = UDim2.new(0.152380958, 0, 0.52, 0)
+Btn7.Size = UDim2.new(0, 130, 0, 35)
+Btn7.Font = Enum.Font.Highway
+Btn7.FontSize = Enum.FontSize.Size28
+Btn7.Text = "Toggle Map"
+Btn7.TextColor3 = Color3.new(1, 1, 1)
+Btn7.TextSize = 17
+Btn7.TextStrokeTransparency = 0
+Btn7.TextWrapped = true
 
 mapGui.Name = "RakeHack_Map"
 mapGui.Parent = game.CoreGui
@@ -178,7 +185,7 @@ Credit.Name = "Credit"
 Credit.Parent = BG
 Credit.BackgroundColor3 = Color3.new(1, 1, 1)
 Credit.BackgroundTransparency = 1
-Credit.Position = UDim2.new(0.195238099, 0, 0.95, 0)
+Credit.Position = UDim2.new(0.15, 0, 0.95, 0)
 Credit.Size = UDim2.new(0, 128, 0, 17)
 Credit.Font = Enum.Font.SourceSans
 Credit.FontSize = Enum.FontSize.Size18
@@ -188,20 +195,75 @@ Credit.TextSize = 16
 Credit.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 Credit.TextStrokeTransparency = 0
 
+ScrapsText.Name = "Scraps"
+ScrapsText.Parent = BG
+ScrapsText.BackgroundColor3 = Color3.new(1, 1, 1)
+ScrapsText.BackgroundTransparency = 1
+ScrapsText.Position = UDim2.new(0.04, 0, 0.6, 0)
+ScrapsText.Size = UDim2.new(0, 128, 0, 17)
+ScrapsText.Font = Enum.Font.SourceSans
+ScrapsText.FontSize = Enum.FontSize.Size18
+ScrapsText.Text = "Scraps count:"
+ScrapsText.TextColor3 = Color3.new(1, 1, 1)
+ScrapsText.TextSize = 20
+ScrapsText.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+ScrapsText.TextStrokeTransparency = 0
+
+ScrapsValue.Name = "ScrapsValue"
+ScrapsValue.Parent = BG
+ScrapsValue.BackgroundColor3 = Color3.new(1, 1, 1)
+ScrapsValue.BackgroundTransparency = 1
+ScrapsValue.Position = UDim2.new(0.45, 0, 0.6, 0)
+ScrapsValue.Size = UDim2.new(0, 128, 0, 17)
+ScrapsValue.Font = Enum.Font.SourceSans
+ScrapsValue.FontSize = Enum.FontSize.Size18
+ScrapsValue.Text = "0"
+ScrapsValue.TextColor3 = Color3.new(0,185,0)
+ScrapsValue.TextSize = 20
+ScrapsValue.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+ScrapsValue.TextStrokeTransparency = 0
+
+FlareGunText.Name = "FlareGun"
+FlareGunText.Parent = BG
+FlareGunText.BackgroundColor3 = Color3.new(1, 1, 1)
+FlareGunText.BackgroundTransparency = 1
+FlareGunText.Position = UDim2.new(0.04, 0, 0.65, 0)
+FlareGunText.Size = UDim2.new(0, 128, 0, 17)
+FlareGunText.Font = Enum.Font.SourceSans
+FlareGunText.FontSize = Enum.FontSize.Size18
+FlareGunText.Text = "FlareGun:"
+FlareGunText.TextColor3 = Color3.new(1, 1, 1)
+FlareGunText.TextSize = 20
+FlareGunText.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+FlareGunText.TextStrokeTransparency = 0
+
+FlareGunValue.Name = "FlareGunValue"
+FlareGunValue.Parent = BG
+FlareGunValue.BackgroundColor3 = Color3.new(1, 1, 1)
+FlareGunValue.BackgroundTransparency = 1
+FlareGunValue.Position = UDim2.new(0.45, 0, 0.65, 0)
+FlareGunValue.Size = UDim2.new(0, 128, 0, 17)
+FlareGunValue.Font = Enum.Font.SourceSans
+FlareGunValue.FontSize = Enum.FontSize.Size18
+FlareGunValue.Text = "false"
+FlareGunValue.TextColor3 = Color3.new(0.666667, 0, 0)
+FlareGunValue.TextSize = 20
+FlareGunValue.TextStrokeColor3 = Color3.new(0.666667, 0, 0)
+FlareGunValue.TextStrokeTransparency = 0
+
 HPText.Name = "HP"
 HPText.Parent = BG
 HPText.BackgroundColor3 = Color3.new(1, 1, 1)
 HPText.BackgroundTransparency = 1
-HPText.Position = UDim2.new(0.05, 0, 0.7, 0)
+HPText.Position = UDim2.new(0.04, 0, 0.7, 0)
 HPText.Size = UDim2.new(0, 128, 0, 17)
 HPText.Font = Enum.Font.SourceSans
 HPText.FontSize = Enum.FontSize.Size18
-HPText.Text = "HP: "
+HPText.Text = "HP:"
 HPText.TextColor3 = Color3.new(1, 1, 1)
 HPText.TextSize = 20
 HPText.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 HPText.TextStrokeTransparency = 0
-HPText.TextWrapped = true
 
 HPValue.Name = "HPValue"
 HPValue.Parent = BG
@@ -216,22 +278,20 @@ HPValue.TextColor3 = Color3.new(0,185,0)
 HPValue.TextSize = 20
 HPValue.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 HPValue.TextStrokeTransparency = 0
-HPValue.TextWrapped = true
 
 PlayerCoords.Name = "PlayerCoords"
 PlayerCoords.Parent = BG
 PlayerCoords.BackgroundColor3 = Color3.new(1, 1, 1)
 PlayerCoords.BackgroundTransparency = 1
-PlayerCoords.Position = UDim2.new(0.05, 0, 0.75, 0)
+PlayerCoords.Position = UDim2.new(0.04, 0, 0.75, 0)
 PlayerCoords.Size = UDim2.new(0, 128, 0, 17)
 PlayerCoords.Font = Enum.Font.SourceSans
 PlayerCoords.FontSize = Enum.FontSize.Size18
-PlayerCoords.Text = "Coords: "
+PlayerCoords.Text = "Coords:"
 PlayerCoords.TextColor3 = Color3.new(1, 1, 1)
-PlayerCoords.TextSize = 18
+PlayerCoords.TextSize = 20
 PlayerCoords.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 PlayerCoords.TextStrokeTransparency = 0
-PlayerCoords.TextWrapped = true
 
 PlayerCoordsValue.Name = "PlayerCoordsValue"
 PlayerCoordsValue.Parent = BG
@@ -246,28 +306,26 @@ PlayerCoordsValue.TextColor3 = Color3.new(0,185,0)
 PlayerCoordsValue.TextSize = 20
 PlayerCoordsValue.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 PlayerCoordsValue.TextStrokeTransparency = 0
-PlayerCoordsValue.TextWrapped = true
 
 RakeDistance.Name = "RakeDistance"
 RakeDistance.Parent = BG
 RakeDistance.BackgroundColor3 = Color3.new(1, 1, 1)
 RakeDistance.BackgroundTransparency = 1
-RakeDistance.Position = UDim2.new(0.12, 0, 0.8, 0)
+RakeDistance.Position = UDim2.new(0.04, 0, 0.8, 0)
 RakeDistance.Size = UDim2.new(0, 128, 0, 17)
 RakeDistance.Font = Enum.Font.SourceSans
 RakeDistance.FontSize = Enum.FontSize.Size18
-RakeDistance.Text = "Rake distance: "
+RakeDistance.Text = "Rake distance:"
 RakeDistance.TextColor3 = Color3.new(1, 1, 1)
-RakeDistance.TextSize = 17
+RakeDistance.TextSize = 20
 RakeDistance.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 RakeDistance.TextStrokeTransparency = 0
-RakeDistance.TextWrapped = true
 
 RakeDistanceValue.Name = "RakeDistanceValue"
 RakeDistanceValue.Parent = BG
 RakeDistanceValue.BackgroundColor3 = Color3.new(1, 1, 1)
 RakeDistanceValue.BackgroundTransparency = 1
-RakeDistanceValue.Position = UDim2.new(0.5, 0, 0.8, 0)
+RakeDistanceValue.Position = UDim2.new(0.45, 0, 0.8, 0)
 RakeDistanceValue.Size = UDim2.new(0, 128, 0, 17)
 RakeDistanceValue.Font = Enum.Font.SourceSans
 RakeDistanceValue.FontSize = Enum.FontSize.Size18
@@ -276,28 +334,26 @@ RakeDistanceValue.TextColor3 = Color3.new(0,185,0)
 RakeDistanceValue.TextSize = 20
 RakeDistanceValue.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 RakeDistanceValue.TextStrokeTransparency = 0
-RakeDistanceValue.TextWrapped = true
 
 HalfEndTime.Name = "Time"
 HalfEndTime.Parent = BG
 HalfEndTime.BackgroundColor3 = Color3.new(1, 1, 1)
 HalfEndTime.BackgroundTransparency = 1
-HalfEndTime.Position = UDim2.new(0.15, 0, 0.85, 0)
+HalfEndTime.Position = UDim2.new(0.04, 0, 0.85, 0)
 HalfEndTime.Size = UDim2.new(0, 128, 0, 17)
 HalfEndTime.Font = Enum.Font.SourceSans
 HalfEndTime.FontSize = Enum.FontSize.Size18
-HalfEndTime.Text = "Time Left: "
+HalfEndTime.Text = "Time Left:"
 HalfEndTime.TextColor3 = Color3.new(1, 1, 1)
 HalfEndTime.TextSize = 20
 HalfEndTime.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 HalfEndTime.TextStrokeTransparency = 0
-HalfEndTime.TextWrapped = true
 
 HalfEndTimeValue.Name = "TimeValue"
 HalfEndTimeValue.Parent = BG
 HalfEndTimeValue.BackgroundColor3 = Color3.new(1, 1, 1)
 HalfEndTimeValue.BackgroundTransparency = 1
-HalfEndTimeValue.Position = UDim2.new(0.5, 0, 0.85, 0)
+HalfEndTimeValue.Position = UDim2.new(0.45, 0, 0.85, 0)
 HalfEndTimeValue.Size = UDim2.new(0, 128, 0, 17)
 HalfEndTimeValue.Font = Enum.Font.SourceSans
 HalfEndTimeValue.FontSize = Enum.FontSize.Size18
@@ -306,28 +362,26 @@ HalfEndTimeValue.TextColor3 = Color3.new(0,185,0)
 HalfEndTimeValue.TextSize = 20
 HalfEndTimeValue.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 HalfEndTimeValue.TextStrokeTransparency = 0
-HalfEndTimeValue.TextWrapped = true
 
 PowerLevel.Name = "PowerLevel"
 PowerLevel.Parent = BG
 PowerLevel.BackgroundColor3 = Color3.new(1, 1, 1)
 PowerLevel.BackgroundTransparency = 1
-PowerLevel.Position = UDim2.new(0.15, 0, 0.9, 0)
+PowerLevel.Position = UDim2.new(0.04, 0, 0.9, 0)
 PowerLevel.Size = UDim2.new(0, 128, 0, 17)
 PowerLevel.Font = Enum.Font.SourceSans
 PowerLevel.FontSize = Enum.FontSize.Size18
-PowerLevel.Text = "Power Level: "
+PowerLevel.Text = "Power Level:"
 PowerLevel.TextColor3 = Color3.new(1, 1, 1)
 PowerLevel.TextSize = 20
 PowerLevel.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 PowerLevel.TextStrokeTransparency = 0
-PowerLevel.TextWrapped = true
 
 PowerLevelValue.Name = "PowerLevelValue"
 PowerLevelValue.Parent = BG
 PowerLevelValue.BackgroundColor3 = Color3.new(1, 1, 1)
 PowerLevelValue.BackgroundTransparency = 1
-PowerLevelValue.Position = UDim2.new(0.5, 0, 0.9, 0)
+PowerLevelValue.Position = UDim2.new(0.45, 0, 0.9, 0)
 PowerLevelValue.Size = UDim2.new(0, 128, 0, 17)
 PowerLevelValue.Font = Enum.Font.SourceSans
 PowerLevelValue.FontSize = Enum.FontSize.Size18
@@ -336,21 +390,20 @@ PowerLevelValue.TextColor3 = Color3.new(0,185,0)
 PowerLevelValue.TextSize = 20
 PowerLevelValue.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
 PowerLevelValue.TextStrokeTransparency = 0
-PowerLevelValue.TextWrapped = true
  
-Toggle1.MouseButton1Click:connect(function()
+Btn1.MouseButton1Click:connect(function()
     ReplicatedStorage.CurrentLightingProperties.FogEnd.Value = 9999;
     if ReplicatedStorage.Night.Value == true then
         ReplicatedStorage.CurrentLightingProperties.Brightness.Value = 50;
     end
 end)
 
-Toggle1.MouseButton2Click:connect(function ()
+Btn1.MouseButton2Click:connect(function ()
     LightHack:destroy()
     mapGui:destroy()
 end)
 
-Toggle2.MouseButton1Click:connect(function()
+Btn2.MouseButton1Click:connect(function()
     for k,v in pairs(Player.PlayerGui:GetChildren()) do
         if(v.DataCost == 631) then v.Frame.StaminaFrame:destroy() end
     end
@@ -360,7 +413,7 @@ Toggle2.MouseButton1Click:connect(function()
     end
 end)
 
-Toggle3.MouseButton1Click:connect(function()
+Btn3.MouseButton1Click:connect(function()
 	Workspace.Map.SafeHouse.Door:destroy()
 	Workspace.Map.Other:destroy()
     for k,v in pairs(Workspace.Filter:GetChildren()) do
@@ -370,7 +423,7 @@ Toggle3.MouseButton1Click:connect(function()
     end
 end)
 
-Toggle4.MouseButton1Click:connect(function()
+Btn4.MouseButton1Click:connect(function()
     Workspace.Map.Trees:destroy()
     for k,v in pairs(Workspace.Filter:GetChildren()) do
         if(string.find(v.Name, "Invisible") ~= nil) then
@@ -379,18 +432,18 @@ Toggle4.MouseButton1Click:connect(function()
     end
 end)
 
-Toggle5.MouseButton1Click:connect(function()
+Btn5.MouseButton1Click:connect(function()
     for k,v in pairs(Workspace.Filter.ScrapSpawns:GetChildren()) do
         for _,d in pairs(v:GetChildren()) do
             if(string.find(d.Name, "Scrap") ~= nil) then
                 Player.Character.HumanoidRootPart.CFrame = d.Scrap.CFrame
-                wait(1.50)
+                wait(1.5)
             end
         end
     end
 end)
 
-Toggle6.MouseButton1Click:connect(function()
+Btn6.MouseButton1Click:connect(function()
     for k,v in pairs(Workspace:GetChildren()) do
         if(string.find(v.Name, "FlareGun") ~= nil) then
             Player.Character.HumanoidRootPart.CFrame = v.FlareGun.CFrame
@@ -398,7 +451,7 @@ Toggle6.MouseButton1Click:connect(function()
     end
 end)
 
-Toggle7.MouseButton1Click:connect(function()
+Btn7.MouseButton1Click:connect(function()
     mapGui.Enabled = not mapGui.Enabled
 end)
 
@@ -406,7 +459,29 @@ while true do
     wait(0.0)
     PowerLevelValue.Text = tostring(ReplicatedStorage.PowerValues.PowerLevel.Value / 10)..'%'
 	HalfEndTimeValue.Text = ReplicatedStorage.Timer.Value
+    flareGunFound = false
+    ScrapsCount = 0
+    for k,v in pairs(Workspace.Filter.ScrapSpawns:GetChildren()) do
+        for _,d in pairs(v:GetChildren()) do
+            if(string.find(d.Name, "Scrap") ~= nil) then
+                ScrapsCount += 1
+            end
+        end
+        ScrapsValue.Text = ScrapsCount
+    end
     for n, c in pairs(Workspace:GetChildren()) do
+        if(string.find(c.Name, "FlareGun")) then
+            newColor = Color3.new(0,185,0)
+            FlareGunValue.TextColor3 = newColor
+            FlareGunValue.TextStrokeColor3 = newColor
+            FlareGunValue.Text = tostring(string.find(c.Name, "FlareGun") ~= nil)
+            flareGunFound = true
+        elseif(not flareGunFound) then
+            newColor = Color3.new(0.666667, 0, 0)
+            FlareGunValue.TextColor3 = newColor
+            FlareGunValue.TextStrokeColor3 = newColor
+            FlareGunValue.Text = tostring(string.find(c.Name, "FlareGun") ~= nil)
+        end
         if(c.Name == Player.Name) then
             for m, l in pairs(c:GetChildren()) do
 				if(l.Name == "Humanoid") then
