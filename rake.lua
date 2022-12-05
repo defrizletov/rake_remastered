@@ -101,10 +101,11 @@ Btn3.Position = UDim2.new(0.152380958, 0, 0.31, 0)
 Btn3.Size = UDim2.new(0, 130, 0, 35)
 Btn3.Font = Enum.Font.Highway
 Btn3.FontSize = Enum.FontSize.Size28
-Btn3.Text = "Delete Other"
+Btn3.Text = "Delete Other & Door HitBox"
 Btn3.TextColor3 = Color3.new(1, 1, 1)
-Btn3.TextSize = 20
+Btn3.TextSize = 17 
 Btn3.TextStrokeTransparency = 0
+Btn3.TextWrapped = true
 
 Btn4.Parent = BG
 Btn4.BackgroundColor3 = Color3.new(31, 149, 134)
@@ -414,13 +415,18 @@ Btn2.MouseButton1Click:connect(function()
 end)
 
 Btn3.MouseButton1Click:connect(function()
-	Workspace.Map.SafeHouse.Door:destroy()
-	Workspace.Map.Other:destroy()
     for k,v in pairs(Workspace.Filter:GetChildren()) do
         if(string.find(v.Name, "Invisible") ~= nil) then
             v:destroy()
         end
     end
+	Workspace.Map.Other:destroy()
+	while true do
+		wait(0)
+		for k,v in pairs(Workspace.Map.SafeHouse.Door:GetChildren()) do
+			if(v.Name == "Door") then v.CanCollide = false end
+		end
+	end
 end)
 
 Btn4.MouseButton1Click:connect(function()
