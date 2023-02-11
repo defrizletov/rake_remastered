@@ -11,6 +11,7 @@ local Workspace = game:GetService("Workspace");
 local Player = game:GetService("Players").LocalPlayer;
 local ScrapsCount = 0;
 local flareGunFound = false;
+local espRake = false;
 local function round(x)
     return x >= 0 and math.floor(x+0.5) or math.ceil(x-0.5)
 end;
@@ -39,13 +40,18 @@ ButtonsSection:AddButton({
 ButtonsSection:AddButton({
 	Name = "Speed & Stamina",
 	Callback = function ()
-        for _, gui in pairs(Player.PlayerGui:GetChildren()) do if(gui.DataCost == 631) then gui.Frame.StaminaFrame:destroy(); end; end;
+        for _, gui in pairs(Player.PlayerGui:GetChildren()) do if(gui.Name == "UI" and gui.DataCost == 631) then gui.Frame.StaminaFrame:destroy(); end; end;
         while true do
             wait(0);
-            Player.Character.Humanoid.WalkSpeed = 27;
+            Player.Character.Humanoid.WalkSpeed = 35;
         end;
 	end    
 });
+
+ButtonsSection:AddButton({
+    Name = "ESP RAKE",
+    Callback = function () espRake = not espRake; end
+})
 
 ButtonsSection:AddButton({
 	Name = "Delete Other & Door HitBox",
@@ -92,14 +98,18 @@ OrionLib:Init();
 
 while true do
     wait(0);
+
     PowerLevelLabel:Set("Power Level: "..tostring(ReplicatedStorage.PowerValues.PowerLevel.Value / 10).."%");
 	TimeLeftLabel:Set("Time Left: "..tostring(ReplicatedStorage.Timer.Value));
+
     flareGunFound = false;
     ScrapsCount = 0;
+
     for k,v in pairs(Workspace.Filter.ScrapSpawns:GetChildren()) do
         for _,d in pairs(v:GetChildren()) do if(d.Name:find("Scrap")) then ScrapsCount += 1; end; end;
         ScrapsLabel:Set("Scraps count: "..tostring(ScrapsCount));
     end;
+
     for n, c in pairs(Workspace:GetChildren()) do
         if(c.Name:find("FlareGun")) then
             FlareGunLabel:Set("FlareGun: "..tostring(string.find(c.Name, "FlareGun") ~= nil));
@@ -107,11 +117,13 @@ while true do
         elseif(not flareGunFound) then
             FlareGunLabel:Set("FlareGun: "..tostring(string.find(c.Name, "FlareGun") ~= nil));
         end;
+
         if(c.Name == Player.Name) then
             for m, l in pairs(c:GetChildren()) do
 				if(l.Name == "Humanoid") then
 					HPLabel:Set("HP: "..string.format("%g",string.format("%.1f",tostring(l.Health))));
 				end;
+
                 if(l.Name == "HumanoidRootPart") then
                     CoordsLabel:Set("Coords: "..tostring(round(l.Position.X)).." "..tostring(round(l.Position.Y)).." "..tostring(round(l.Position.Z)));
                     for k,v in pairs(Workspace:GetChildren()) do
@@ -128,3 +140,52 @@ while true do
         end;
     end;
 end;
+
+-- [ESP]
+
+local currentCamera = game:GetService("Workspace").CurrentCamera;
+local worldToViewportPoint = currentCamera.worldToViewportPoint;
+local HeadOff = Vector3.new(0, 0.5, 0);
+local LegOff = Vector3.new(0, 3, 0);
+
+local BoxOutline = Drawing.new("Square");
+BoxOutline.Visible = false;
+BoxOutline.Color = Color3.new(0,0,0);
+BoxOutline.Thickness = 3;
+BoxOutline.Transparency = 1;
+BoxOutline.Filled = false;
+
+local Box = Drawing.new("Square");
+Box.Visible = false;
+Box.Color = Color3.new(1,1,1);
+Box.Thickness = 1;
+Box.Transparency = 1;
+Box.Filled = false;
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    if Workspace:FindFirstChild("Rake") ~= nil and espRake == true then
+        local Vector, onScreen = camera:worldToViewportPoint(Workspace.Rake.HumanoidRootPart.Position);
+
+        local RootPart = Workspace.Rake.HumanoidRootPart;
+        local Head = Workspace.Rake.Head;
+        local RootPosition, RootVis = worldToViewportPoint(currentCamera, RootPart.Position);
+        local HeadPosition = worldToViewportPoint(currentCamera, Head.Position + HeadOff);
+        local LegPosition = worldToViewportPoint(currentCamera, RootPart.Position - LegOff);
+
+        if onScreen then
+            BoxOutline.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+            BoxOutline.Position = Vector2.new(RootPosition.X - BoxOutline.Size.X / 2, RootPosition.Y - BoxOutline.Size.Y / 2)
+            BoxOutline.Visible = true
+
+            Box.Size = Vector2.new(1000 / RootPosition.Z, HeadPosition.Y - LegPosition.Y)
+            Box.Position = Vector2.new(RootPosition.X - Box.Size.X / 2, RootPosition.Y - Box.Size.Y / 2)
+            Box.Visible = true;
+        else
+            BoxOutline.Visible = false
+            Box.Visible = false
+        end
+    else
+        BoxOutline.Visible = false
+        Box.Visible = false
+    end
+end);
